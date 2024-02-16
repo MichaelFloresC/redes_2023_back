@@ -22,8 +22,6 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $totalUsuarios = User::count();
-
         $user=User::where('correo', $request['correo'])
                     ->first();
 
@@ -33,17 +31,20 @@ class UserController extends Controller
             $response['code']=200;
         }
         else{
-            $user=User::create([
-                'id_usuario'       =>$totalUsuarios+1,
-                'nombre'           =>$request->nombre,
-                'app_paterno'      =>$request->app_paterno,
-                'app_materno'      =>$request->app_materno,
-                'correo'           =>$request->correo,
-                'nacionalidad'     =>$request->nacionalidad,
-                'idioma'           =>$request->idioma,
-                'id_consorcio'     =>$request->id_consorcio,
-                'id_rol'           =>$request->id_rol
-            ]);
+
+          // $nuevo_user[] = $request->all();
+            
+          $nuevo_user['nombre'] = $request['nombre'];
+          $nuevo_user['app_paterno'] = $request['app_paterno'];
+          $nuevo_user['app_materno'] = $request['app_materno'];
+          $nuevo_user['correo'] = $request['correo'];
+          $nuevo_user['nacionalidad'] =$request['nacionalidad'];
+          $nuevo_user['idioma'] = $request['idioma'];
+          $nuevo_user['id_consorcio'] = $request['id_consorcio'];
+          $nuevo_user['id_rol'] = $request['id_rol'];
+        
+          User::create($nuevo_user);
+
             $response['status']=1;
             $response['message']='Usuario registrado Exitosamente';
             $response['code']=200;

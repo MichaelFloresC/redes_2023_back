@@ -16,6 +16,9 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get('/usuarios', [UserController::class, 'index']);
+//Route::post('login', 'UserController@LoginGoogle');
+Route::post('/editar_usuario', [UserController::class, 'update']);
+Route::post('/registrar_usuario', [UserController::class, 'create']);
 
 
 

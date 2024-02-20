@@ -19,8 +19,10 @@ use App\Http\Controllers\TourController;
 Route::get('/usuarios', [UserController::class, 'index']);
 Route::post('/editar_usuario', [UserController::class, 'update']);
 Route::post('/registrar_usuario', [UserController::class, 'create']);
+Route::delete('/delete_usuario/{id}', [UserController::class, 'destroy']);
 
 Route::get('/tours', [TourController::class, 'index']);
+Route::post('/registrar_tour', [TourController::class, 'create']);
 
 
 

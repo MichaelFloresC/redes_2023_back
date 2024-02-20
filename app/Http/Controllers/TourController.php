@@ -18,9 +18,35 @@ class TourController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $tour=Tour::where('nombre_destino', $request['nombre_destino'])
+                    ->first();
+
+        if($tour){
+            $response['status']=0;
+            $response['message']='El tour ya existe';
+            $response['code']=200;
+        }
+        else{
+
+          // $nuevo_user[] = $request->all();
+            
+          $nuevo_tour['nombre_destino'] = $request['nombre_destino'];
+          $nuevo_tour['foto'] = $request['foto'];
+          $nuevo_tour['detalle'] = $request['detalle'];
+          $nuevo_tour['id_empresa'] = 1;
+         
+
+        
+          Tour::create($nuevo_tour);
+
+            $response['status']=1;
+            $response['message']='Tour registrado Exitosamente';
+            $response['code']=200;
+        }
+
+        return response()->json($response);
     }
 
     /**

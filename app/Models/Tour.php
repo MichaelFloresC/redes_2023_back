@@ -11,6 +11,9 @@ class Tour extends Model
 
     protected $table = 'tour';
 
+    public $timestamps = false;
+    protected $primaryKey = 'id_tour';
+
     protected $fillable = [
         'id_tour',
         'nombre_destino',

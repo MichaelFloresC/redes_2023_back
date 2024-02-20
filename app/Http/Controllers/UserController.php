@@ -40,8 +40,9 @@ class UserController extends Controller
           $nuevo_user['correo'] = $request['correo'];
           $nuevo_user['nacionalidad'] =$request['nacionalidad'];
           $nuevo_user['idioma'] = $request['idioma'];
-          $nuevo_user['id_consorcio'] = $request['id_consorcio'];
-          $nuevo_user['id_rol'] = $request['id_rol'];
+          $nuevo_user['observaciones'] = $request['observaciones'];
+          $nuevo_user['id_consorcio'] = 1;
+          $nuevo_user['id_rol'] = 1;
         
           User::create($nuevo_user);
 
@@ -117,6 +118,20 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete_usuario=User::where('id_usuario', $id)->delete();
+
+        if($delete_usuario){
+            $response['status']=1;
+            $response['message']='Curso Eliminado Satisfactoriamente';
+            $response['code']=200;
+        }
+        else{
+            $response['status']=0;
+            $response['message']='Curso no Encontrado, intente nuevamente';
+            $response['code']=400;
+        }
+
+
+        return response()->json($response);
     }
 }

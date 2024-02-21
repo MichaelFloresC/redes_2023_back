@@ -23,7 +23,8 @@ Route::delete('/delete_usuario/{id}', [UserController::class, 'destroy']);
 
 Route::get('/tours', [TourController::class, 'index']);
 Route::post('/registrar_tour', [TourController::class, 'create']);
-
+Route::post('/editar_tour', [TourController::class, 'update']);
+Route::delete('/delete_tour/{id}', [TourController::class, 'destroy']);
 
 
 

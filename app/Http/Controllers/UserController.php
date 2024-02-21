@@ -122,12 +122,12 @@ class UserController extends Controller
 
         if($delete_usuario){
             $response['status']=1;
-            $response['message']='Curso Eliminado Satisfactoriamente';
+            $response['message']='Usuario Eliminado Satisfactoriamente';
             $response['code']=200;
         }
         else{
             $response['status']=0;
-            $response['message']='Curso no Encontrado, intente nuevamente';
+            $response['message']='Usuario no Encontrado, intente nuevamente';
             $response['code']=400;
         }
 

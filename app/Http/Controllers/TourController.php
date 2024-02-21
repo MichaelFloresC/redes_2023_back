@@ -76,9 +76,31 @@ class TourController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $id_tour= $request->input('id_tour');
+
+        $camposActualizados = [
+            'nombre_destino' => $request->input('nombre_destino'),
+            'foto' => $request->input('foto'),
+            'detalle' => $request->input('detalle')    
+        ];
+        
+        $edit_tour=Tour::where('id_tour', $id_tour)->update($camposActualizados);
+
+        if($edit_tour){
+            $response['status']=1;
+            $response['message']='Tour Actualizado';
+            $response['code']=200;
+        }
+        else{
+            $response['status']=0;
+            $response['message']='Datos Incorrectos';
+            $response['code']=400;
+        }
+
+
+        return response()->json($response);
     }
 
     /**
@@ -86,6 +108,20 @@ class TourController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete_tour=Tour::where('id_tour', $id)->delete();
+
+        if($delete_tour){
+            $response['status']=1;
+            $response['message']='Tour Eliminado Satisfactoriamente';
+            $response['code']=200;
+        }
+        else{
+            $response['status']=0;
+            $response['message']='Tour no Encontrado, intente nuevamente';
+            $response['code']=400;
+        }
+
+
+        return response()->json($response);
     }
 }
